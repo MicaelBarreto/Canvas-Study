@@ -1,12 +1,12 @@
 var canvas = document.querySelector('canvas');
 var retangles = [
-    { id: 1, x: 500, y: 100, width: 50, height: 100 },
-    { id: 2, x: 560, y: 100, width: 50, height: 100 },
-    { id: 3, x: 620, y: 100, width: 50, height: 100 },
-    { id: 4, x: 680, y: 100, width: 50, height: 100 },
-    { id: 5, x: 500, y: 210, width: 50, height: 100 },
-    { id: 6, x: 560, y: 210, width: 50, height: 100 },
-    { id: 7, x: 620, y: 210, width: 50, height: 100 },
+    { id: 1, x: 500, y: 100, width: 50, height: 100, name: "Sabrina", date: new Date().toDateString() },
+    { id: 2, x: 560, y: 100, width: 50, height: 100, name: "Filipe", date: new Date().toDateString() },
+    { id: 3, x: 620, y: 100, width: 50, height: 100, name: "Mariana", date: new Date().toDateString() },
+    { id: 4, x: 680, y: 100, width: 50, height: 100, name: "Pedro", date: new Date().toDateString() },
+    { id: 5, x: 500, y: 210, width: 50, height: 100, name: "Betina", date: new Date().toDateString() },
+    { id: 6, x: 560, y: 210, width: 50, height: 100, name: "Márcia", date: new Date().toDateString() },
+    { id: 7, x: 620, y: 210, width: 50, height: 100, name: "Diogo", date: new Date().toDateString()},
 ];
 
 canvas.width = window.innerWidth;
@@ -51,27 +51,22 @@ function drawRetangles(retangles) {
 function getMousePosition(canvas, event) {
     let rect = canvas.getBoundingClientRect(); 
     let x = event.clientX - rect.left; 
-    let y = event.clientY - rect.top; 
-    console.log(`Coordinate id: 1, x: ${x}, Coordinate y: ${y}`);
-    let vef = retangles.find(function(retangle) {
+    let y = event.clientY - rect.top;
+    return retangles.find(function(retangle) {
         if(x >= retangle.x && x <= (retangle.x+retangle.width) && y >= retangle.y && y <= (retangle.y+retangle.height)) {
             return retangle;
         }
     });
-    console.log(vef);
-    // var retangle = {};
-    // for(var i=0; i<retangles.length; i++){
-    //     retangle = retangles[i];
-    //     if(x >= retangle.x && x <= (retangle.x+retangle.width) && y >= retangle.y && y <= (retangle.y+retangle.height)) {
-    //         // return retangle;
-    //         console.log(retangle);
-    //         console.log('entrou');
-    //     }
-    // }
 
 } 
   
 canvas.addEventListener("mousedown", function(e) 
 { 
-    getMousePosition(canvas, e); 
+    var retangle = getMousePosition(canvas, e);
+    
+    if(retangle) {
+        document.getElementById("name").value = retangle.name;
+        document.getElementById("date").value = retangle.date;
+        document.getElementById('myModal').style.display = "block";
+    }
 }); 

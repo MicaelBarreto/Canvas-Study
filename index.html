@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        /* canvas {
-            border: 1px black solid;
-        } */
-        body {
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./page.css">
     <title>Canvas Test</title>
 </head>
 <body>
     <canvas></canvas>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeButton">&times;</span>
+            <form action="">
+                <label for="name">Nome</label>
+                <input type="text" id="name">
+                <label for="date">Data</label>
+                <input type="text" id="date">
+            </form>
+        </div>    
+    </div>
     <script src="./canvas.js"></script>
+    <script>
+        document.getElementById('closeButton').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.getElementById("name").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById('myModal').style.display = "none";
+        }, false);
+    </script>
 </body>
 </html>
