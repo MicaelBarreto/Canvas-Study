@@ -45,7 +45,16 @@ var width;
 var height;
 
 function drawRetangles(retangles) {
-    retangles.map(function(ret) { return c.fillRect(ret.x, ret.y, ret.width, ret.height) })
+    retangles.map(function(ret) {
+        c.fillStyle = 'rgba(0, 255, 255, 0.5)';
+        c.fillRect(ret.x, ret.y, ret.width, ret.height);
+        c.fillStyle = "black";
+        c.font = "20px sans-serif";
+        c.fillText(ret.id, 
+            ((ret.x+(ret.x+ret.width)-13)/2), 
+            ((ret.y+(ret.y+ret.height)-35)/2));
+
+    })
 }
 
 function getMousePosition(canvas, event) {
@@ -58,7 +67,7 @@ function getMousePosition(canvas, event) {
         }
     });
 
-} 
+}
   
 canvas.addEventListener("mousedown", function(e) 
 { 
@@ -70,3 +79,14 @@ canvas.addEventListener("mousedown", function(e)
         document.getElementById('myModal').style.display = "block";
     }
 }); 
+
+canvas.addEventListener("mousemove", function(e) 
+{ 
+    var retangle = getMousePosition(canvas, e);
+    
+    if(retangle) {
+        document.body.style.cursor = "pointer";
+    }else{
+        document.body.style.cursor = "default";
+    }
+});
